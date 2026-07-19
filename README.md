@@ -58,7 +58,7 @@ The project strictly follows a **Hybrid (Flutter + Kotlin Native)** architecture
 
 ## 🔌 IPC Bridge Method Contract
 
-All communication passes through [LockMethodChannel](file:///c:/Users/dirga/OneDrive/Documents/Project/touch_blocker/lib/core/channels/lock_method_channel.dart) using the following contract constants:
+All communication passes through `LockMethodChannel` using the following contract constants:
 
 | Method Name | Payload | Returns | Description |
 |---|---|---|---|
@@ -74,9 +74,9 @@ All communication passes through [LockMethodChannel](file:///c:/Users/dirga/OneD
 
 ## 🌐 Localization (l10n) & Translation Support
 
-The project is localized in both **Indonesian (`id`)** and **English (`en`)**. It utilizes Flutter's standard localization tool configured via [l10n.yaml](file:///c:/Users/dirga/OneDrive/Documents/Project/touch_blocker/l10n.yaml):
+The project is localized in both **Indonesian (`id`)** and **English (`en`)**. It utilizes Flutter's standard localization tool configured via l10n.yaml:
 
-*   **Configured Output**: Generated Dart localizations are placed directly inside [lib/l10n/](file:///c:/Users/dirga/OneDrive/Documents/Project/touch_blocker/lib/l10n) (`synthetic-child: false`, `output-dir: lib/l10n`) rather than in `.dart_tool/` to keep project structure clean and visible.
+*   **Configured Output**: Generated Dart localizations are placed directly inside `lib/l10n/` (`synthetic-child: false`, `output-dir: lib/l10n`) rather than in `.dart_tool/` to keep project structure clean and visible.
 *   **Formatters & Placeholders**: ARB bundles (`app_en.arb`, `app_id.arb`) support pluralization and integer formatting (e.g. `{count} dipilih` / `{count} selected`) to format numbers correctly per locale.
 
 ---
@@ -117,7 +117,7 @@ lib/
 *   Physical Android Device (Accessibility Services and Overlays cannot be fully tested on standard Emulators)
 
 ### Permissions Required
-The application uses two critical Android permissions configured in [AndroidManifest.xml](file:///c:/Users/dirga/OneDrive/Documents/Project/touch_blocker/android/app/src/main/AndroidManifest.xml):
+The application uses two critical Android permissions configured in `AndroidManifest.xml`:
 1.  **Display Over Other Apps (`SYSTEM_ALERT_WINDOW`)**: Needed to draw the overlay block window.
 2.  **Accessibility Service (`BIND_ACCESSIBILITY_SERVICE`)**: Needed to monitor foreground app state changes event-driven.
 3.  **Query All Packages (`QUERY_ALL_PACKAGES`)**: Needed to list user-installed apps.
