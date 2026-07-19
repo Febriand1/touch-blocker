@@ -147,7 +147,8 @@ The application uses two critical Android permissions configured in `AndroidMani
 
 | Dashboard | Overlay Active |
 | :---: | :---: |
-| <img width="720" height="988" alt="Image" src="https://github.com/user-attachments/assets/739c0270-2639-42da-aeb7-c676c986a35f" /> | <img width="720" height="988" alt="Image" src="https://github.com/user-attachments/assets/c9707b50-1a2a-4838-b6e8-bc839ead1880" /> |
+| <img width="720" height="988" alt="Image" src="https://github.com/user-attachments/assets/c9707b50-1a2a-4838-b6e8-bc839ead1880" /> | <img width="720" height="988" alt="Image" src="https://github.com/user-attachments/assets/739c0270-2639-42da-aeb7-c676c986a35f" /> |
+| <img width="720" height="988" alt="Image" src="https://github.com/user-attachments/assets/966bbe91-80f7-41f9-9f4c-ae7a30ea6cee" /> | <img width="720" height="988" alt="Image" src="https://github.com/user-attachments/assets/660c3e02-32ce-4beb-898f-5c4d2756d4eb" /> |
 
 ---
 
