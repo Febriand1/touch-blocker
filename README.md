@@ -143,7 +143,7 @@ The application uses two critical Android permissions configured in `AndroidMani
 
 ---
 
-## App Preview
+## 📸 App Preview
 
 | Dashboard | Overlay Active |
 | :---: | :---: |
