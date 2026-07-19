@@ -88,6 +88,34 @@ class LockMethodChannel {
     }
   }
 
+  /// Reads the saved theme mode preference from Android SharedPreferences.
+  /// Returns "system" as default on error.
+  static Future<String> getThemeMode() async {
+    try {
+      final result = await _channel.invokeMethod<String>(
+        ChannelConstants.getThemeMode,
+      );
+      return result ?? "system";
+    } on PlatformException catch (e) {
+      _logError(ChannelConstants.getThemeMode, e);
+      return "system";
+    }
+  }
+
+  /// Persists the active theme mode preference to Android SharedPreferences.
+  static Future<bool> setThemeMode(String mode) async {
+    try {
+      await _channel.invokeMethod<void>(
+        ChannelConstants.setThemeMode,
+        mode,
+      );
+      return true;
+    } on PlatformException catch (e) {
+      _logError(ChannelConstants.setThemeMode, e);
+      return false;
+    }
+  }
+
   // --------------------------------------------------------------------------
   // Permission checks  (return bool — no side effects)
   // --------------------------------------------------------------------------

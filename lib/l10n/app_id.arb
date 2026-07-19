@@ -9,6 +9,7 @@
   "permissionA11yTitle": "Layanan Aksesibilitas",
   "permissionA11yDesc": "Dibutuhkan untuk mendeteksi aplikasi mana yang sedang aktif di layar.",
   "grantPermissionButton": "Beri Izin",
+  "managePermissionButton": "Atur Izin",
 
   "serviceControlLabel": "Kontrol Layanan",
   "serviceControlActiveTitle": "Layanan Aktif",
@@ -50,5 +51,9 @@
         "type": "int"
       }
     }
-  }
+  },
+  "themeSectionLabel": "Tema Tampilan",
+  "themeSystem": "Sistem",
+  "themeLight": "Terang",
+  "themeDark": "Gelap"
 }

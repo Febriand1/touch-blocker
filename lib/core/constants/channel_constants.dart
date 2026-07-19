@@ -32,6 +32,16 @@ class ChannelConstants {
   static const String isLockServiceActive = 'isLockServiceActive';
 
   // --------------------------------------------------------------------------
+  // Theme preferences  (Flutter ↔ Kotlin)
+  // --------------------------------------------------------------------------
+
+  /// Reads the persisted theme mode selection from SharedPreferences.
+  static const String getThemeMode = 'getThemeMode';
+
+  /// Saves the active theme mode selection to SharedPreferences.
+  static const String setThemeMode = 'setThemeMode';
+
+  // --------------------------------------------------------------------------
   // Permission checks  (Flutter → Kotlin, returns bool)
   // --------------------------------------------------------------------------
 

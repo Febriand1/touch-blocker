@@ -160,7 +160,7 @@ class _SelectorScreenState extends State<SelectorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0F0F0F),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: _buildAppBar(),
       body: _buildBody(),
       floatingActionButton: _buildSaveFab(),
@@ -169,13 +169,14 @@ class _SelectorScreenState extends State<SelectorScreen> {
   }
 
   PreferredSizeWidget _buildAppBar() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return AppBar(
-      backgroundColor: const Color(0xFF1A1A1A),
+      backgroundColor: isDark ? const Color(0xFF1A1A1A) : Colors.white,
       elevation: 0,
       title: Text(
         AppLocalizations.of(context)!.configTargetAppsTitle,
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          color: isDark ? Colors.white : Colors.black,
           fontWeight: FontWeight.w600,
           fontSize: 18,
         ),
@@ -311,18 +312,19 @@ class _AppTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 180),
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
       decoration: BoxDecoration(
         color: isSelected
             ? const Color(0xFF6C63FF).withAlpha(30)
-            : const Color(0xFF1E1E1E),
+            : (isDark ? const Color(0xFF1E1E1E) : Colors.white),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
           color: isSelected
               ? const Color(0xFF6C63FF).withAlpha(180)
-              : Colors.transparent,
+              : (isDark ? Colors.transparent : const Color(0xFFE5E5EA)),
           width: 1.2,
         ),
       ),
@@ -332,8 +334,8 @@ class _AppTile extends StatelessWidget {
         leading: _AppIcon(iconBytes: app.icon),
         title: Text(
           app.name,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: isDark ? Colors.white : Colors.black,
             fontWeight: FontWeight.w500,
             fontSize: 14,
           ),
@@ -394,19 +396,26 @@ class _AppIcon extends StatelessWidget {
     return _fallback();
   }
 
-  Widget _fallback() => Container(
-        width: 42,
-        height: 42,
-        decoration: BoxDecoration(
-          color: const Color(0xFF2A2A2A),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: const Icon(
-          Icons.android_rounded,
-          color: Color(0xFF555555),
-          size: 22,
-        ),
-      );
+  Widget _fallback() {
+    return Builder(
+      builder: (context) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+        return Container(
+          width: 42,
+          height: 42,
+          decoration: BoxDecoration(
+            color: isDark ? const Color(0xFF2A2A2A) : const Color(0xFFE5E5EA),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Icon(
+            Icons.android_rounded,
+            color: isDark ? const Color(0xFF555555) : const Color(0xFF8E8E93),
+            size: 22,
+          ),
+        );
+      }
+    );
+  }
 }
 
 /// Search bar displayed in the AppBar bottom area.
@@ -417,15 +426,19 @@ class _SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return TextField(
       onChanged: onChanged,
-      style: const TextStyle(color: Colors.white, fontSize: 14),
+      style: TextStyle(
+        color: isDark ? Colors.white : Colors.black,
+        fontSize: 14,
+      ),
       decoration: InputDecoration(
         hintText: AppLocalizations.of(context)!.selectorSearchHint,
         hintStyle: const TextStyle(color: Color(0xFF555555), fontSize: 14),
         prefixIcon: const Icon(Icons.search, color: Color(0xFF555555), size: 20),
         filled: true,
-        fillColor: const Color(0xFF252525),
+        fillColor: isDark ? const Color(0xFF252525) : const Color(0xFFF2F2F7),
         contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

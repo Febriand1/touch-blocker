@@ -8,6 +8,7 @@
   "permissionA11yTitle": "Accessibility Service",
   "permissionA11yDesc": "Required to detect which application is currently active on the screen.",
   "grantPermissionButton": "Grant Permission",
+  "managePermissionButton": "Manage Permission",
   "serviceControlLabel": "Service Control",
   "serviceControlActiveTitle": "Service Active",
   "serviceControlInactiveTitle": "Enable Screen Lock",
@@ -47,5 +48,9 @@
         "type": "int"
       }
     }
-  }
+  },
+  "themeSectionLabel": "Appearance Theme",
+  "themeSystem": "System",
+  "themeLight": "Light",
+  "themeDark": "Dark"
 }

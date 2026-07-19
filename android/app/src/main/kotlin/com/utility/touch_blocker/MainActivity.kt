@@ -18,6 +18,7 @@ class MainActivity : FlutterActivity() {
         const val PREFS_NAME = "touch_blocker_prefs"
         const val KEY_TARGET_PACKAGES = "target_packages"
         const val KEY_SERVICE_ACTIVE = "service_active"
+        const val KEY_THEME_MODE = "theme_mode"
     }
 
     // In-memory cache — always kept in sync with SharedPreferences.
@@ -107,6 +108,20 @@ class MainActivity : FlutterActivity() {
 
                     "isLockServiceActive" -> {
                         result.success(prefs.getBoolean(KEY_SERVICE_ACTIVE, false))
+                    }
+
+                    "getThemeMode" -> {
+                        result.success(prefs.getString(KEY_THEME_MODE, "system") ?: "system")
+                    }
+
+                    "setThemeMode" -> {
+                        val mode = call.arguments as? String
+                        if (mode != null) {
+                            prefs.edit().putString(KEY_THEME_MODE, mode).apply()
+                            result.success(null)
+                        } else {
+                            result.error("INVALID_ARGUMENT", "Expected String for theme mode", null)
+                        }
                     }
 
                     // ----------------------------------------------------------

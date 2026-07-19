@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:touch_blocker/l10n/app_localizations.dart';
+import 'package:touch_blocker/main.dart';
 
 import 'package:touch_blocker/core/channels/lock_method_channel.dart';
 import 'package:touch_blocker/features/app_selector/screens/selector_screen.dart';
@@ -123,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0F0F0F),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -168,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     description: AppLocalizations.of(context)!.configTargetAppsDesc,
                     onTap: _navigateToSelector,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
                 ]),
               ),
             ),
@@ -180,24 +181,22 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   Widget _buildSliverAppBar() {
     final double screenHeight = MediaQuery.of(context).size.height;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bgColor = isDark ? const Color(0xFF0F0F0F) : Colors.white;
 
     return SliverAppBar(
       expandedHeight: screenHeight * 0.1,
       floating: false,
       pinned: true,
-      backgroundColor: const Color(0xFF1A1A1A),
+      backgroundColor: bgColor,
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Color(0xFF2D1B69), Color(0xFF11001C)],
-            ),
+          decoration: BoxDecoration(
+            color: bgColor,
           ),
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
+              padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -208,16 +207,16 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         width: 52,
                         height: 52,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF6C63FF).withAlpha(50),
+                          color: isDark ? Colors.white.withAlpha(20) : Colors.black.withAlpha(15),
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
-                            color: const Color(0xFF6C63FF).withAlpha(100),
+                            color: isDark ? Colors.white.withAlpha(40) : Colors.black.withAlpha(30),
                             width: 1,
                           ),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.enhanced_encryption_rounded,
-                          color: Color(0xFF6C63FF),
+                          color: isDark ? Colors.white : Colors.black,
                           size: 28,
                         ),
                       ),
@@ -229,8 +228,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                           children: [
                             Text(
                               AppLocalizations.of(context)!.appTitle,
-                              style: const TextStyle(
-                                color: Colors.white,
+                              style: TextStyle(
+                                color: isDark ? Colors.white : Colors.black,
                                 fontSize: 24,
                                 fontWeight: FontWeight.w700,
                                 letterSpacing: -0.5,
@@ -240,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             Text(
                               AppLocalizations.of(context)!.appSubtitle,
                               style: TextStyle(
-                                color: Colors.white.withAlpha(140),
+                                color: (isDark ? Colors.white : Colors.black).withAlpha(140),
                                 fontSize: 13,
                                 height: 1.2,
                               ),
@@ -249,6 +248,59 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                             ),
                           ],
                         ),
+                      ),
+                      const SizedBox(width: 8),
+                      ValueListenableBuilder<ThemeMode>(
+                        valueListenable: themeNotifier,
+                        builder: (context, currentMode, _) {
+                          IconData iconData;
+                          if (currentMode == ThemeMode.dark) {
+                            iconData = Icons.light_mode_rounded;
+                          } else if (currentMode == ThemeMode.light) {
+                            iconData = Icons.dark_mode_rounded;
+                          } else {
+                            final systemBrightness = MediaQuery.of(context).platformBrightness;
+                            iconData = systemBrightness == Brightness.dark
+                                ? Icons.light_mode_rounded
+                                : Icons.dark_mode_rounded;
+                          }
+
+                          return Container(
+                            width: 44,
+                            height: 44,
+                            decoration: BoxDecoration(
+                              color: isDark ? Colors.white.withAlpha(20) : Colors.black.withAlpha(15),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: isDark ? Colors.white.withAlpha(40) : Colors.black.withAlpha(30),
+                                width: 1,
+                              ),
+                            ),
+                            child: IconButton(
+                              icon: Icon(iconData),
+                              color: isDark ? Colors.white : Colors.black,
+                              iconSize: 20,
+                              padding: EdgeInsets.zero,
+                              onPressed: () async {
+                                ThemeMode nextMode;
+                                if (currentMode == ThemeMode.dark) {
+                                  nextMode = ThemeMode.light;
+                                } else if (currentMode == ThemeMode.light) {
+                                  nextMode = ThemeMode.dark;
+                                } else {
+                                  final systemBrightness = MediaQuery.of(context).platformBrightness;
+                                  nextMode = systemBrightness == Brightness.dark
+                                      ? ThemeMode.light
+                                      : ThemeMode.dark;
+                                }
+
+                                themeNotifier.value = nextMode;
+                                final modeStr = nextMode == ThemeMode.dark ? 'dark' : 'light';
+                                await LockMethodChannel.setThemeMode(modeStr);
+                              },
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -313,7 +365,9 @@ class _PermissionCard extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
-        color: const Color(0xFF1A1A1A),
+        color: Theme.of(context).brightness == Brightness.dark
+            ? const Color(0xFF1A1A1A)
+            : Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: _accentColor.withAlpha(isGranted ? 80 : 120),
@@ -344,8 +398,10 @@ class _PermissionCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                     ),
@@ -359,29 +415,45 @@ class _PermissionCard extends StatelessWidget {
                       height: 1.4,
                     ),
                   ),
-                  if (!isGranted) ...[
-                    const SizedBox(height: 12),
-                    SizedBox(
-                      height: 34,
-                      child: FilledButton.icon(
-                        style: FilledButton.styleFrom(
-                          backgroundColor: _accentColor,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    height: 34,
+                    child: isGranted
+                        ? OutlinedButton.icon(
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: _accentColor,
+                              side: BorderSide(color: _accentColor.withAlpha(120), width: 1.2),
+                              padding: const EdgeInsets.symmetric(horizontal: 14),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              textStyle: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            onPressed: onRequest,
+                            icon: const Icon(Icons.settings_rounded, size: 14),
+                            label: Text(AppLocalizations.of(context)!.managePermissionButton),
+                          )
+                        : FilledButton.icon(
+                            style: FilledButton.styleFrom(
+                              backgroundColor: _accentColor,
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(horizontal: 14),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              textStyle: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            onPressed: onRequest,
+                            icon: const Icon(Icons.open_in_new_rounded, size: 14),
+                            label: Text(AppLocalizations.of(context)!.grantPermissionButton),
                           ),
-                          textStyle: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        onPressed: onRequest,
-                        icon: const Icon(Icons.open_in_new_rounded, size: 14),
-                        label: Text(AppLocalizations.of(context)!.grantPermissionButton),
-                      ),
-                    ),
-                  ],
+                  ),
                 ],
               ),
             ),
@@ -428,18 +500,23 @@ class _ServiceControlCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final activeColor = const Color(0xFF6C63FF);
 
-    return AnimatedContainer(
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return AnimatedOpacity(
       duration: const Duration(milliseconds: 300),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1A1A1A),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isActive
-              ? activeColor.withAlpha(120)
-              : const Color(0xFF2A2A2A),
-          width: 1.2,
+      opacity: isEnabled ? 1.0 : 0.5,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        decoration: BoxDecoration(
+          color: isDark ? const Color(0xFF1A1A1A) : Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isActive
+                ? activeColor.withAlpha(120)
+                : (isDark ? const Color(0xFF2A2A2A) : const Color(0xFFE5E5EA)),
+            width: 1.2,
+          ),
         ),
-      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         child: Row(
@@ -451,7 +528,7 @@ class _ServiceControlCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isActive
                     ? activeColor.withAlpha(40)
-                    : const Color(0xFF252525),
+                    : (isDark ? const Color(0xFF252525) : const Color(0xFFF2F2F7)),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
@@ -470,7 +547,9 @@ class _ServiceControlCard extends StatelessWidget {
                         ? AppLocalizations.of(context)!.serviceControlActiveTitle
                         : AppLocalizations.of(context)!.serviceControlInactiveTitle,
                     style: TextStyle(
-                      color: isEnabled ? Colors.white : const Color(0xFF555555),
+                      color: isEnabled
+                          ? (isDark ? Colors.white : Colors.black)
+                          : const Color(0xFF555555),
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                     ),
@@ -505,16 +584,19 @@ class _ServiceControlCard extends StatelessWidget {
                     onChanged: isEnabled ? onToggle : null,
                     activeThumbColor: activeColor,
                     activeTrackColor: activeColor.withAlpha(80),
-                    inactiveThumbColor: const Color(0xFF444444),
-                    inactiveTrackColor: const Color(0xFF2A2A2A),
-                    trackOutlineColor: WidgetStateProperty.all(
-                      Colors.transparent,
-                    ),
+                    inactiveThumbColor: isDark ? const Color(0xFF444444) : const Color(0xFFFFFFFF),
+                    inactiveTrackColor: isDark ? const Color(0xFF2A2A2A) : const Color(0xFFE5E5EA),
+                    trackOutlineColor: WidgetStateProperty.resolveWith<Color?>((states) {
+                      if (states.contains(WidgetState.selected)) {
+                        return Colors.transparent;
+                      }
+                      return isDark ? Colors.transparent : const Color(0xFFD1D1D6);
+                    }),
                   ),
           ],
         ),
       ),
-    );
+    ));
   }
 }
 
@@ -534,9 +616,16 @@ class _NavigationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Material(
-      color: const Color(0xFF1A1A1A),
-      borderRadius: BorderRadius.circular(16),
+      color: isDark ? const Color(0xFF1A1A1A) : Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: isDark ? Colors.transparent : const Color(0xFFE5E5EA),
+          width: 1.2,
+        ),
+      ),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
@@ -565,8 +654,8 @@ class _NavigationCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
                       ),
