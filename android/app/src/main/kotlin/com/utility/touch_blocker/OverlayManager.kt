@@ -1,4 +1,4 @@
-package com.example.touch_blocker
+package com.utility.touch_blocker
 
 import android.content.Context
 import android.graphics.Color

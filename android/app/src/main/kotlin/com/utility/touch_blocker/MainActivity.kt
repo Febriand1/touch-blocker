@@ -1,4 +1,4 @@
-package com.example.touch_blocker
+package com.utility.touch_blocker
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,7 @@ import io.flutter.plugin.common.MethodChannel
 class MainActivity : FlutterActivity() {
 
     companion object {
-        private const val CHANNEL = "com.example.touch_blocker/lock_service"
+        private const val CHANNEL = "com.utility.touch_blocker/lock_service"
 
         // SharedPreferences constants — shared with LockAccessibilityService.
         const val PREFS_NAME = "touch_blocker_prefs"

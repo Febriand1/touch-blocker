@@ -6,7 +6,8 @@ class ChannelConstants {
   ChannelConstants._(); // Prevent instantiation.
 
   /// Must match the channel name registered in [MainActivity.kt].
-  static const String lockServiceChannel = 'com.example.touch_blocker/lock_service';
+  static const String lockServiceChannel =
+      'com.utility.touch_blocker/lock_service';
 
   // --------------------------------------------------------------------------
   // Service control  (Flutter → Kotlin)
@@ -52,5 +53,6 @@ class ChannelConstants {
 
   /// Opens the system Accessibility Settings page.
   /// Uses [Settings.ACTION_ACCESSIBILITY_SETTINGS].
-  static const String requestAccessibilityPermission = 'requestAccessibilityPermission';
+  static const String requestAccessibilityPermission =
+      'requestAccessibilityPermission';
 }

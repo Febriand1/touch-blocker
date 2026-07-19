@@ -1,4 +1,4 @@
-package com.example.touch_blocker
+package com.utility.touch_blocker
 
 import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.AccessibilityServiceInfo
