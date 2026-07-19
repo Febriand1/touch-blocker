@@ -140,3 +140,9 @@ The application uses two critical Android permissions configured in [AndroidMani
     flutter run
     ```
 5.  Give the required permission flags in the Home Dashboard screen to activate the lock engine overlay.
+
+## 🔒 Privacy Policy & Security
+This application uses AccessibilityService solely to detect the foreground application for the purpose of touch blocking. No data, keystrokes, or personal information is ever collected, logged, or transmitted. All processing happens locally on-device.
+
+## ⚠️ Disclaimer
+This project is provided for educational and utility purposes only. The author is not responsible for any misuse, device issues, or unintended consequences resulting from the use of this software. By using this app, you acknowledge that you are responsible for managing your own device permissions.
