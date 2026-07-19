@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Defines the capabilities and event scope of LockAccessibilityService.
+
+    accessibilityEventTypes:
+      - typeWindowStateChanged : fired when a new Activity/Dialog comes to foreground.
+        This is the primary trigger for package name validation.
+      - typeWindowContentChanged: fired when window content changes within the same app.
+        Used as a secondary guard against apps that hot-swap fragments without
+        changing the top-level window (e.g., TikTok's in-app navigation).
+
+    accessibilityFeedbackType:
+      - feedbackGeneric : no audio/haptic feedback — purely silent, zero-overhead.
+
+    flags:
+      - flagReportViewIds         : not needed yet; omitted to keep footprint minimal.
+      - flagRetrieveInteractiveWindows: needed for multi-window / split-screen support.
+
+    canRequestFilterKeyEvents / canRequestTouchExplorationMode: false — we do NOT
+    intercept input at service level; touch blocking is handled via WindowManager
+    overlay flags (FLAG_NOT_TOUCHABLE toggled on the overlay view).
+-->
+<accessibility-service
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagRetrieveInteractiveWindows"
+    android:canRetrieveWindowContent="true"
+    android:description="@string/accessibility_service_description"
+    android:notificationTimeout="100"
+    android:settingsActivity=".MainActivity" />

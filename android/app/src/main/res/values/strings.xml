@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Touch Blocker</string>
+    <string name="accessibility_service_description">
+        Touch Blocker menggunakan Accessibility Service untuk mendeteksi aplikasi yang sedang aktif
+        di layar. Izin ini diperlukan agar layar kunci dapat aktif secara otomatis saat aplikasi
+        target (misalnya TikTok) dibuka.
+    </string>
+</resources>

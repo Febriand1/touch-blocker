@@ -1,0 +1,54 @@
+{
+  "@@locale": "id",
+  "appTitle": "Touch Blocker",
+  "appSubtitle": "Pelindung layar berbasis Layanan Aksesibilitas",
+
+  "permissionStatusLabel": "Status Izin",
+  "permissionOverlayTitle": "Tampil di Atas Aplikasi",
+  "permissionOverlayDesc": "Dibutuhkan untuk menampilkan overlay kunci di atas aplikasi target.",
+  "permissionA11yTitle": "Layanan Aksesibilitas",
+  "permissionA11yDesc": "Dibutuhkan untuk mendeteksi aplikasi mana yang sedang aktif di layar.",
+  "grantPermissionButton": "Beri Izin",
+
+  "serviceControlLabel": "Kontrol Layanan",
+  "serviceControlActiveTitle": "Layanan Aktif",
+  "serviceControlInactiveTitle": "Aktifkan Kunci Layar",
+  "serviceControlActiveDesc": "Memantau aplikasi target secara aktif.",
+  "serviceControlInactiveDesc": "Ketuk untuk mulai memantau aplikasi target.",
+  "serviceControlDisabledDesc": "Lengkapi izin di atas terlebih dahulu.",
+  
+  "configurationLabel": "Konfigurasi",
+  "configTargetAppsTitle": "Pilih Aplikasi Target",
+  "configTargetAppsDesc": "Pilih aplikasi mana yang akan dikunci secara otomatis.",
+  "selectorSearchHint": "Cari nama atau package name…",
+  "selectorLoadingText": "Memuat daftar aplikasi…",
+  "selectorEmptyText": "Tidak ada aplikasi yang ditemukan.",
+  "selectorApplyingText": "Menerapkan…",
+  "selectorSaveButton": "Simpan & Terapkan ({count})",
+  "@selectorSaveButton": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "selectorSaveSuccess": "✅ {count} aplikasi diterapkan.",
+  "@selectorSaveSuccess": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "selectorSaveError": "❌ Gagal mengirim ke layanan. Coba lagi.",
+  "selectorLoadError": "Gagal memuat daftar aplikasi.",
+  "selectorRetryButton": "Coba Lagi",
+  "selectorSelectedCount": "{count} dipilih",
+  "@selectorSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
+}

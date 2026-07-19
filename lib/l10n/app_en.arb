@@ -1,0 +1,51 @@
+{
+  "@@locale": "en",
+  "appTitle": "Touch Blocker",
+  "appSubtitle": "Screen protector based on Accessibility Service",
+  "permissionStatusLabel": "Permission Status",
+  "permissionOverlayTitle": "Display Over Other Apps",
+  "permissionOverlayDesc": "Required to display the lock overlay over target applications.",
+  "permissionA11yTitle": "Accessibility Service",
+  "permissionA11yDesc": "Required to detect which application is currently active on the screen.",
+  "grantPermissionButton": "Grant Permission",
+  "serviceControlLabel": "Service Control",
+  "serviceControlActiveTitle": "Service Active",
+  "serviceControlInactiveTitle": "Enable Screen Lock",
+  "serviceControlActiveDesc": "Actively monitoring target applications.",
+  "serviceControlInactiveDesc": "Tap to start monitoring target applications.",
+  "serviceControlDisabledDesc": "Complete the permissions above first.",
+  "configurationLabel": "Configuration",
+  "configTargetAppsTitle": "Select Target Applications",
+  "configTargetAppsDesc": "Select which applications will be locked automatically.",
+  "selectorSearchHint": "Search name or package name…",
+  "selectorLoadingText": "Loading applications list…",
+  "selectorEmptyText": "No applications found.",
+  "selectorApplyingText": "Applying…",
+  "selectorSaveButton": "Save & Apply ({count})",
+  "@selectorSaveButton": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "selectorSaveSuccess": "✅ {count} applications applied.",
+  "@selectorSaveSuccess": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "selectorSaveError": "❌ Failed to send to service. Try again.",
+  "selectorLoadError": "Failed to load applications list.",
+  "selectorRetryButton": "Try Again",
+  "selectorSelectedCount": "{count} selected",
+  "@selectorSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
+}
