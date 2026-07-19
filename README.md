@@ -141,8 +141,20 @@ The application uses two critical Android permissions configured in `AndroidMani
     ```
 5.  Give the required permission flags in the Home Dashboard screen to activate the lock engine overlay.
 
+---
+
+## App Preview
+
+| Dashboard | Overlay Active |
+| :---: | :---: |
+| <img width="720" height="988" alt="Image" src="https://github.com/user-attachments/assets/739c0270-2639-42da-aeb7-c676c986a35f" /> | <img width="720" height="988" alt="Image" src="https://github.com/user-attachments/assets/c9707b50-1a2a-4838-b6e8-bc839ead1880" /> |
+
+---
+
 ## 🔒 Privacy Policy & Security
 This application uses AccessibilityService solely to detect the foreground application for the purpose of touch blocking. No data, keystrokes, or personal information is ever collected, logged, or transmitted. All processing happens locally on-device.
+
+---
 
 ## ⚠️ Disclaimer
 This project is provided for educational and utility purposes only. The author is not responsible for any misuse, device issues, or unintended consequences resulting from the use of this software. By using this app, you acknowledge that you are responsible for managing your own device permissions.
