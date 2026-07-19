@@ -1,6 +1,6 @@
 # Touch Blocker 🛡️
 
-A high-performance Android screen lock and touch blocker utility. Functioning similarly to iOS Guided Access or Assistive Touch, it displays a floating native overlay over specific target applications (e.g., TikTok, YouTube) and intercepts/blocks touch inputs to prevent accidental operations.
+A high-performance Android screen lock and touch blocker utility. It displays a floating native overlay over specific target applications (e.g., TikTok, YouTube) and intercepts/blocks touch inputs to prevent accidental operations.
 
 ---
 
